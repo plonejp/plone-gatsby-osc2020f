@@ -1,22 +1,86 @@
 import React from "react"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+// import { Layout } from "../templates/Layout";
+// import { Button } from "@material-ui/core";
 
-const IndexPage = () => (
+import { graphql } from 'gatsby';
+
+import Layout from '../templates/Layout';
+import Document from '../components/Document';
+import Folder from '../components/Folder';
+
+const nodes = query => (query ? query['edges'] : []).map(edge => edge.node);
+
+
+
+// const IndexPage = () => (
+//   <Layout>
+//     <Button variant="contained" color="primary">
+//       Hello World!
+//     </Button>
+//   </Layout>
+// )
+
+const IndexPage = ({ data }) => (
   <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    <Document
+      data={data.ploneDocument}
+      images={nodes(data['allPloneImage'])}
+      files={nodes(data['allPloneFile'])}
+    />
+    <hr style={{ background: '#e8eef2' }} />
+    <Folder
+      data={data.ploneSite}
+      title="Contents"
+      images={nodes(data['allSitePloneImage'])}
+      files={nodes(data['allSitePloneFile'])}
+    />
   </Layout>
-)
+);
 
-export default IndexPage
+export default IndexPage;
+
+
+export const query = graphql`
+  query IndexPageQuery {
+    ploneDocument(_path: { in: ["/frontpage/", "/front-page/"] }) {
+      ...Document
+    }
+    allPloneFile(
+      filter: { _backlinks: { in: ["/frontpage/", "/front-page/"] } }
+    ) {
+      edges {
+        node {
+          ...File
+        }
+      }
+    }
+    allPloneImage(
+      filter: { _backlinks: { in: ["/frontpage/", "/front-page/"] } }
+    ) {
+      edges {
+        node {
+          ...Image
+        }
+      }
+    }
+    ploneSite(_path: { eq: "/" }) {
+      ...Site
+    }
+    allSitePloneFile: allPloneFile(filter: { _backlinks: { eq: "/" } }) {
+      edges {
+        node {
+          ...File
+        }
+      }
+    }
+    allSitePloneImage: allPloneImage(filter: { _backlinks: { eq: "/" } }) {
+      edges {
+        node {
+          ...Image
+        }
+      }
+    }
+  }
+`;
