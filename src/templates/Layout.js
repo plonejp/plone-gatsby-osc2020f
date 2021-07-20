@@ -10,21 +10,6 @@ import Breadcrumbs from '../components/breadcrumbs';
 import NavBar from '../components/navbar';
 import './Layout.css';
 
-// export type LayoutProps = {
-//   children: React.ReactNode;
-// };
-
-// const theme = createMuiTheme({
-//     //テーマの定義
-// });
-
-// export const Layout = (props) => (
-//     <ThemeProvider theme={theme}>
-//         {props.children}
-//     </ThemeProvider>
-// );
-
-
 
 const theme = createMuiTheme({
     //テーマの定義

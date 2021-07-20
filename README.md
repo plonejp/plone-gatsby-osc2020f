@@ -115,9 +115,10 @@ gatsby-plugin-material-ui などの、追加パッケージインストール
 ```
 $ npm install @material-ui/core
 $ npm install gatsby-plugin-material-ui @material-ui/styles
+$ npm install --save @material-ui/icons
 $ npm install --save gatsby-source-filesystem
 $ npm install --save gatsby-source-plone
-$ npm install --save  core-js@2.6.11
+$ npm install --save core-js@2.6.11
 ```
 
 plone-typedefs.graphql を別プロジェクトからコピーした

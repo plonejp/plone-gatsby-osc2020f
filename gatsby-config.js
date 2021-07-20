@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `OSC Plone Gatsby デモ`,
     subTitle: 'Plone + Gatsby 2 = \u2764',
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: `Gatsbyのデモサイトです。`,
     author: `@terapyon`,
   },
   plugins: [
